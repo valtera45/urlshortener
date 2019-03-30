@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="A URL Shortener Application">
+    <meta name="author" content="Christopher Wright">
+    <title>URL Shortener</title>
+    <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="lib/bootstrap/css/cover.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="js/urlconstants.js"></script>
+    <script src="js/urlerrorhandler.js"></script>
+    <script src="js/uiservice.js"></script>
+    <script src="js/urlservice.js"></script>
+</head>
+
+<body class="text-center">
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+        <header class="masthead mb-auto">
+            <div class="inner">
+                <h3 class="masthead-brand">URL Shortener</h3>
+                <nav class="nav nav-masthead justify-content-center">
+                    <a class="nav-link active" href="#">Home</a>
+                    <a class="nav-link" href="#">About</a>
+                    <a class="nav-link" href="#">Contact</a>
+                </nav>
+            </div>
+        </header>
+
+        <main role="main" class="inner cover">
+            <h1 class="cover-heading">A URL Shortener.</h1>
+            <p class="lead">Enter a URL and get back a short URL.</p>
+
+            <form id="create-url-form">
+                <div class="form-group">
+                    <label for="url-value">Enter a URL</label>
+                    <input id="url-value" class="form-control" type="text" placeholder="Enter URL...">
+                </div>
+                <button type="submit" value="Submit" class="btn btn-primary">Post URL</button>
+            </form>
+            <br/>
+            <p id="returned-url" class="lead"></p>
+            <p id="error-message" class="error"></p>
+        </main>
+
+        <footer class="mastfoot mt-auto">
+            <div class="inner">
+                <p>A URL shortener by <a href="https://github.com/valtera45/">Chris Wright</a>.</p>
+            </div>
+        </footer>
+</body>
+
+</html>
