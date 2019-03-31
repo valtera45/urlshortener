@@ -1,7 +1,5 @@
 package com.wright.urlshortener.service;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
@@ -26,15 +24,37 @@ import com.wright.urlshortener.utils.Base62UrlEncoder;
 @Transactional
 public class URLServiceImpl implements URLService {
 
-    @Autowired
-    private URLRepository urlRepository;
-
     private static AtomicLong counter = new AtomicLong(0L);
 
     private static final int URL_LENGTH = 6;
 
     private static final Logger log = Logger
             .getLogger(URLService.class.getName());
+
+    @Autowired
+    private URLRepository urlRepository;
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<URL> getAllUrls() {
+        log.debug("Retrieving all urls.");
+        return urlRepository.findAll();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public URL getUrl(String shortUrl) {
+        if (shortUrl.length() < URL_LENGTH || shortUrl.length() > URL_LENGTH) {
+            throw new URLBadRequestException(
+                    "The URL to retrieve must be 6 characters.");
+        }
+        log.debug("Retrieving short url: " + shortUrl);
+        return urlRepository.findOneByShortUrl(shortUrl);
+    }
 
     /**
      * {@inheritDoc}
@@ -66,28 +86,6 @@ public class URLServiceImpl implements URLService {
         url.setShortUrl(encodedUrl);
         log.debug("The new URL is: " + url);
         return urlRepository.saveAndFlush(url);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public URL getUrl(String shortUrl) {
-        if (shortUrl.length() < URL_LENGTH || shortUrl.length() > URL_LENGTH) {
-            throw new URLBadRequestException(
-                    "The URL to retrieve must be 6 characters.");
-        }
-        log.debug("Retrieving short url: " + shortUrl);
-        return urlRepository.findOneByShortUrl(shortUrl);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public List<URL> getAllUrls() {
-        log.debug("Retrieving all urls.");
-        return urlRepository.findAll();
     }
 
     public void validateUrl(String url) {

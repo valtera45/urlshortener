@@ -5,8 +5,6 @@ import static org.junit.Assert.assertEquals;
 import java.io.IOException;
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -26,7 +24,6 @@ import com.wright.urlshortener.model.URL;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
-@Transactional
 public class URLControllerWebIntegrationTest {
     
     private TestRestTemplate restTemplate = new TestRestTemplate();
@@ -39,7 +36,7 @@ public class URLControllerWebIntegrationTest {
     }
     
     /**
-     * Tests all endpoints.
+     * Tests all end points.
      */
     @Test
     public void testCreateAndGet() {

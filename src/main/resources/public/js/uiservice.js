@@ -14,8 +14,10 @@ const postNewUrl = function() {
 
     $.urlservice.makeRequest($.urlconstants.API_URL, $.urlservice.TYPE_POST, function(status, result) {
         if (status === $.urlservice.STATUS_SUCCESS) {
-            $('#returned-url').text('The new URL is: ' + $.urlconstants.HREF + result.data.shortUrl);
+            $('#returned-url').hide().fadeIn('slow').text('The new URL is: ' + $.urlconstants.HREF + result.data.shortUrl);
+            $('#error-message').fadeOut('slow');
         } else {
+            $('#error-message').fadeIn('slow');
             $('#error-message').text($.urlerrorhandler.parseError(result.request, result.textStatus, result.error));
         }
     }, 'text/plain', urlValue, );
